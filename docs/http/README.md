@@ -4,7 +4,7 @@ From one ghci instance, fire up a server:
 ```
 > ghci http.hs
 *Main> :set -XOverloadedStrings
-*Main> let wrapper path dat = return $ A.object ["wrappedForYou" A..= dat]
+*Main> let wrapper path dat = return $ object ["wrappedForYou" .= dat]
 *Main> serve 6655 wrapper
 ```
 
@@ -12,8 +12,7 @@ From an other one, make a request:
 ```
 > ghci http.hs
 *Main> :set -XOverloadedStrings
-*Main> req "127.0.0.1:6655" $ A.object ["a" A..= 12]
-*Main> req "http://127.0.0.1:6655" $ A.object ["a" A..= 12]
+*Main> req "http://127.0.0.1:6655" $ object ["a" .= 12]
 Just (Object fromList [("wrappedForYou",Object fromList [("a",Number 12.0)])])
 ```
 
